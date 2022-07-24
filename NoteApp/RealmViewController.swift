@@ -12,17 +12,15 @@ import RealmSwift
 
 class ListItem: Object {
     @Persisted var title: String = ""
-    @Persisted var index: Int
+    // @Persisted var index: Int = 0
 }
 
 class RealmViewController: UIViewController {
-  
+    
     @IBOutlet weak var tableView: UITableView!
     
-    var realm = try! Realm()
+    let realm = try! Realm()
     var items = [ListItem]()
-    let defaultPath = Realm.Configuration.defaultConfiguration.path!
-    try NSFileManager.defaultManager().removeItemAtPath(defaultPath)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +29,6 @@ class RealmViewController: UIViewController {
         
         //see realm data base
         print("db: \(realm.configuration.fileURL!)")
-
     }
     
     func fetch() {
@@ -53,22 +50,13 @@ class RealmViewController: UIViewController {
         })
         
         // second method
-//        realm.beginWrite()
-//        realm.add(item)
-//       try! realm.commitWrite()
+        //        realm.beginWrite()
+        //        realm.add(item)
+        //       try! realm.commitWrite()
     }
     
-    func DeleteUserInformation(index: Int){
-
-            realm.beginWrite()
-
-            let list = try! realm.objects(ListItem.self)
-            realm.delete(list)
-
-            try! realm.commitWrite()
-
-        }
-
+    
+    
     @IBAction func buttonAct(_ sender: Any) {
         showAlert()
     }
