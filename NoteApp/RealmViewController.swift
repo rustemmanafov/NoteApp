@@ -49,6 +49,12 @@ class RealmViewController: UIViewController {
             fetch()
         })
         
+        func delete() {
+            
+        }
+        
+        
+        
         // second method
         //        realm.beginWrite()
         //        realm.add(item)
