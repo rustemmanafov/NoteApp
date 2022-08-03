@@ -49,19 +49,22 @@ class RealmViewController: UIViewController {
             fetch()
         })
         
-        func delete() {
-            
-        }
-        
-        
-        
         // second method
         //        realm.beginWrite()
         //        realm.add(item)
         //       try! realm.commitWrite()
     }
     
-    
+//    func delete(index: Int) {
+//        let a = ListItem()
+//        a.index = index
+//       
+//        try! realm.write({
+//            realm.delete(a)
+//            fetch()
+//        })
+//
+//    }
     
     @IBAction func buttonAct(_ sender: Any) {
         showAlert()
