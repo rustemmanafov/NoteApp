@@ -95,16 +95,14 @@ extension CoreDataViewController: UITableViewDelegate, UITableViewDataSource {
             alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { _ in
                 let text = alert.textFields?[0].text ?? ""
                 self.delete(index: indexPath.row)
-               // self.listItems.reverse()
-               // tableView.reloadData()
                 self.save(title: text)
+                tableView.reloadData()
             }))
             self.present(alert, animated: true, completion: nil)
         }))
         present(actionSheet, animated: true, completion: nil)
 
     }
-    
     
 }
 
