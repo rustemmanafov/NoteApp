@@ -30,7 +30,6 @@ class CoreDataViewController: UIViewController {
         } catch {
             print(error.localizedDescription)
         }
-        
     }
     
     func update(title: String, oldTitle: String) {
@@ -58,7 +57,6 @@ class CoreDataViewController: UIViewController {
             print(error.localizedDescription)
         }
     }
-    
     
     func delete(index: Int) {
         context.delete(listItems[index])
@@ -109,7 +107,7 @@ extension CoreDataViewController: UITableViewDelegate, UITableViewDataSource {
             }
             alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { _ in
                 let text = alert.textFields?[0].text ?? ""
-//                self.delete(index: indexPath.row)
+             // self.delete(index: indexPath.row)
                 self.update(title: text, oldTitle: self.listItems[indexPath.row].title ?? "")
                 self.listItems[indexPath.row].title = text
                 tableView.reloadData()

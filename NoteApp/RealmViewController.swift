@@ -12,7 +12,6 @@ import RealmSwift
 
 class ListItem: Object {
     @Persisted var title: String = ""
-    // @Persisted var index: Int = 0
 }
 
 class RealmViewController: UIViewController {
@@ -26,8 +25,7 @@ class RealmViewController: UIViewController {
         super.viewDidLoad()
         
         fetch()
-        
-        //see realm data base
+        // see realm data base
         print("db: \(realm.configuration.fileURL!)")
     }
     
@@ -60,17 +58,6 @@ class RealmViewController: UIViewController {
             realm.delete(items[index])
         })
     }
-    
-//    func delete(index: Int) {
-//        let a = ListItem()
-//        a.index = index
-//       
-//        try! realm.write({
-//            realm.delete(a)
-//            fetch()
-//        })
-//
-//    }
     
     @IBAction func buttonAct(_ sender: Any) {
         showAlert()
