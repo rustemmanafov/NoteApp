@@ -23,7 +23,7 @@ class CoreDataViewController: UIViewController {
     }
     
     func fetch() {
-        do{
+        do {
             listItems = try context.fetch(List.fetchRequest())
             listItems.reverse()
             tableView.reloadData()
@@ -31,6 +31,21 @@ class CoreDataViewController: UIViewController {
             print(error.localizedDescription)
         }
         
+    }
+    
+    func update(title: String, oldTitle: String) {
+        do {
+            let items = try context.fetch(List.fetchRequest())
+            for item in items {
+                if item.title == oldTitle {
+                    item.title = title
+                }
+            }
+            try context.save()
+            //fetch()
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
     func save(title: String) {
@@ -94,8 +109,9 @@ extension CoreDataViewController: UITableViewDelegate, UITableViewDataSource {
             }
             alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { _ in
                 let text = alert.textFields?[0].text ?? ""
-                self.delete(index: indexPath.row)
-                self.save(title: text)
+//                self.delete(index: indexPath.row)
+                self.update(title: text, oldTitle: self.listItems[indexPath.row].title ?? "")
+                self.listItems[indexPath.row].title = text
                 tableView.reloadData()
             }))
             self.present(alert, animated: true, completion: nil)

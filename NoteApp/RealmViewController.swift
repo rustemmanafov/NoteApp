@@ -55,6 +55,12 @@ class RealmViewController: UIViewController {
         //       try! realm.commitWrite()
     }
     
+    func delete(index: Int) {
+        try! realm.write({
+            realm.delete(items[index])
+        })
+    }
+    
 //    func delete(index: Int) {
 //        let a = ListItem()
 //        a.index = index
@@ -90,6 +96,7 @@ extension RealmViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            delete(index: indexPath.row)
             items.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
