@@ -100,6 +100,7 @@ extension CoreDataViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let actionSheet = UIAlertController(title: "Edit Note", message: "", preferredStyle: .actionSheet)
+        
         actionSheet.addAction(UIAlertAction(title: "Edit", style: .default, handler: { _ in
             let alert = UIAlertController(title: "Edit Note", message: "", preferredStyle: .alert)
             alert.addTextField { textField in
@@ -114,8 +115,8 @@ extension CoreDataViewController: UITableViewDelegate, UITableViewDataSource {
             }))
             self.present(alert, animated: true, completion: nil)
         }))
+        actionSheet.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
         present(actionSheet, animated: true, completion: nil)
-
     }
     
 }
@@ -127,12 +128,16 @@ extension CoreDataViewController {
         alert.addTextField { textField in
             textField.placeholder = "Enter here..."
         }
-        alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { _ in
-            let text = alert.textFields?[0].text ?? ""
-            self.save(title: text)
+        alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { textField in
+            let textField = alert.textFields?[0]
+            
+            if textField?.text?.isEmpty == true {
+                print("Please filled any note")
+            } else {
+                self.save(title: textField?.text ?? "")
+            }
         }))
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
-        
     }
 }
